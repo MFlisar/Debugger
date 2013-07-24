@@ -62,69 +62,69 @@ public class Debugger
     // Debugging call functions - DEBUG LEVEL
     // --------------------------------------
 
-    public static void d(Class<?> source, String message)
+    public static void d(String message)
     {
-        d(true, source, message);
+        d(true, message);
     }
 
-    public static void d(Class<?> source, String message, String extraTag)
+    public static void d(String message, String extraTag)
     {
-        d(true, source, message, extraTag);
+        d(true, message, extraTag);
     }
 
-    public static void d(boolean debug, Class<?> source, String message)
+    public static void d(boolean debug, String message)
     {
-        d(debug, source, message, null);
+        d(debug, message, null);
     }
 
-    public static void d(boolean debug, Class<?> source, String message, String extraTag)
+    public static void d(boolean debug, String message, String extraTag)
     {
-        MainDebugger.debug(debug, source, message, extraTag, LEVEL.D, DEFAULT_CLASS_DEPTH);
+        MainDebugger.debug(debug, message, extraTag, LEVEL.D, DEFAULT_CLASS_DEPTH);
     }
 
     // --------------------------------------
     // Debugging call functions - EXCEPTION LEVEL
     // --------------------------------------
     
-    public static void e(Class<?> source, String message)
+    public static void e(String message)
     {
-        e(true, source, message);
+        e(true, message);
     }
 
-    public static void e(Class<?> source, String message, String extraTag)
+    public static void e(String message, String extraTag)
     {
-        e(true, source, message, extraTag);
+        e(true, message, extraTag);
     }
 
-    public static void e(boolean debug, Class<?> source, String message)
+    public static void e(boolean debug, String message)
     {
-        e(debug, source, message, null);
+        e(debug, message, null);
     }
 
-    public static void e(boolean debug, Class<?> source, String message, String extraTag)
+    public static void e(boolean debug, String message, String extraTag)
     {
-        MainDebugger.debug(debug, source, message, extraTag, LEVEL.E, DEFAULT_CLASS_DEPTH);
+        MainDebugger.debug(debug, message, extraTag, LEVEL.E, DEFAULT_CLASS_DEPTH);
     }
     
-    public static void e(Class<?> source, Exception exception)
+    public static void e(Exception exception)
     {
-        e(true, source, exception);
+        e(true, exception);
     }
 
-    public static void e(Class<?> source, Exception exception, String extraTag)
+    public static void e(Exception exception, String extraTag)
     {
-        e(true, source, exception, extraTag);
+        e(true, exception, extraTag);
     }
 
-    public static void e(boolean debug, Class<?> source, Exception exception)
+    public static void e(boolean debug, Exception exception)
     {
-        e(debug, source, exception, null);
+        e(debug, exception, null);
     }
 
-    public static void e(boolean debug, Class<?> source, Exception exception, String extraTag)
+    public static void e(boolean debug, Exception exception, String extraTag)
     {
         
-        MainDebugger.debug(debug, source, exceptionToString(exception), extraTag, LEVEL.E, DEFAULT_CLASS_DEPTH - 1);
+        MainDebugger.debug(debug, exceptionToString(exception), extraTag, LEVEL.E, DEFAULT_CLASS_DEPTH - 1);
     }
 
     // --------------------------------------

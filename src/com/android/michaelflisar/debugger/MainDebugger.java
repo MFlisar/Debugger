@@ -17,7 +17,7 @@ public class MainDebugger
     // Debugging main function
     // --------------------------------------
 
-    protected static void debug(boolean debug, Class<?> source, String message, String extraTag, LEVEL level, int classDepth)
+    protected static void debug(boolean debug, String message, String extraTag, LEVEL level, int classDepth)
     {
         if (!Debugger.isEnabled() || !debug)
             return;
