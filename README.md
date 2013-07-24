@@ -34,8 +34,8 @@ just call one of the static `Debugger.d` or `Debugger.e` functions...
 
 Like for example:
 
-    Debugger.d(this.getClass(), "debug message");
-    Debugger.e(this.getClass(), exception);
+    Debugger.d("debug message");
+    Debugger.e(exception);
     ...
 
 License
