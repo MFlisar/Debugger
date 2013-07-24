@@ -32,6 +32,12 @@ Usage
 
 just call one of the static `Debugger.d` or `Debugger.e` functions...
 
+Like for example:
+
+    Debugger.d(this.getClass(), "debug message");
+    Debugger.e(this.getClass(), exception);
+    ...
+
 License
 =======
 
