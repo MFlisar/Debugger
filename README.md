@@ -4,8 +4,28 @@ Debugger
 [Android] convenient debugger with automatic function name and row number in output
 
 Output looks like following:
-Main:   07-24 19:05:09.993: D/WorkoutLogWeekViewActivity:1080 updateWeek: TEXT
-Thread: 07-24 19:04:22.332: D/BuyHelper:48 ...onQueryInventoryFinished: TEXT
+
+    Main:   
+        TAG: WeekViewActivity:1080 updateWeek
+        TEXT: Text
+    Thread: 
+        TAG: BuyHelper:48 ...onQueryInventoryFinished
+        TEXT: TEXT
+        
+sometimes you may want to use a GLOBAL Tag (for example, on live development for sending a bug report with just your application messages)...
+For this reason, you can use following two methods (when creating your app):
+
+    Debugger.setAppTag("MyAppTag");
+    Debugger.setMode(MODE.APP_TAG);
+    
+Afterwards, the debug output will look like following:
+
+    Main:   
+        TAG: MyAppTag
+        TEXT: 2013.07.24 19:11:44 [WeekViewActivity:1080 updateWeek] Text
+    Thread: 
+        TAG: MyAppTag
+        TEXT: 2013.07.24 19:11:38 [BuyHelper:48 ...onQueryInventoryFinished] Text
 
 Usage
 =====
