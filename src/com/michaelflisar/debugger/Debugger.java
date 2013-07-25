@@ -1,5 +1,5 @@
 
-package com.android.michaelflisar.debugger;
+package com.michaelflisar.debugger;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;

@@ -1,13 +1,13 @@
 
-package com.android.michaelflisar.debugger;
+package com.michaelflisar.debugger;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import android.util.Log;
 
-import com.android.michaelflisar.debugger.Debugger.LEVEL;
-import com.android.michaelflisar.debugger.Debugger.MODE;
+import com.michaelflisar.debugger.Debugger.LEVEL;
+import com.michaelflisar.debugger.Debugger.MODE;
 
 public class MainDebugger
 {
