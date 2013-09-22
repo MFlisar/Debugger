@@ -61,6 +61,15 @@ public class MainDebugger
     private static String getCurrentClassInfo(int level)
     {
         StackTraceElement[] trace = new Throwable().getStackTrace();
+//        level = trace.length - 1;
+//        String c = trace[level].getClassName();
+//        String x = Debugger.class.getName();
+//        while (!(c = trace[level].getClassName()).equals(x))
+//        {
+//            level--;
+//        }
+//        level += 2;
+        
         String className = trace[level].getClassName();
         String classNameShort = className.substring(className.lastIndexOf(".") + 1, className.length());
         boolean innerClass = classNameShort.contains("$");

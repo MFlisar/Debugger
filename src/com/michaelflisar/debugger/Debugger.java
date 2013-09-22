@@ -64,17 +64,17 @@ public class Debugger
 
     public static void d(String message)
     {
-        d(true, message);
+        MainDebugger.debug(true, message, null, LEVEL.D, DEFAULT_CLASS_DEPTH);
     }
 
     public static void d(String message, String extraTag)
     {
-        d(true, message, extraTag);
+        MainDebugger.debug(true, message, extraTag, LEVEL.D, DEFAULT_CLASS_DEPTH);
     }
 
     public static void d(boolean debug, String message)
     {
-        d(debug, message, null);
+        MainDebugger.debug(debug, message, null, LEVEL.D, DEFAULT_CLASS_DEPTH);
     }
 
     public static void d(boolean debug, String message, String extraTag)
@@ -88,17 +88,17 @@ public class Debugger
     
     public static void e(String message)
     {
-        e(true, message);
+        MainDebugger.debug(true, message, null, LEVEL.E, DEFAULT_CLASS_DEPTH);
     }
 
     public static void e(String message, String extraTag)
     {
-        e(true, message, extraTag);
+        MainDebugger.debug(true, message, extraTag, LEVEL.E, DEFAULT_CLASS_DEPTH);
     }
 
     public static void e(boolean debug, String message)
     {
-        e(debug, message, null);
+        MainDebugger.debug(debug, message, null, LEVEL.E, DEFAULT_CLASS_DEPTH);
     }
 
     public static void e(boolean debug, String message, String extraTag)
@@ -108,23 +108,23 @@ public class Debugger
     
     public static void e(Exception exception)
     {
-        e(true, exception);
+        MainDebugger.debug(true, exceptionToString(exception), null, LEVEL.E, DEFAULT_CLASS_DEPTH);
     }
 
     public static void e(Exception exception, String extraTag)
     {
-        e(true, exception, extraTag);
+        MainDebugger.debug(true, exceptionToString(exception), extraTag, LEVEL.E, DEFAULT_CLASS_DEPTH);
     }
 
     public static void e(boolean debug, Exception exception)
     {
-        e(debug, exception, null);
+        MainDebugger.debug(debug, exceptionToString(exception), null, LEVEL.E, DEFAULT_CLASS_DEPTH);
     }
 
     public static void e(boolean debug, Exception exception, String extraTag)
     {
         
-        MainDebugger.debug(debug, exceptionToString(exception), extraTag, LEVEL.E, DEFAULT_CLASS_DEPTH - 1);
+        MainDebugger.debug(debug, exceptionToString(exception), extraTag, LEVEL.E, DEFAULT_CLASS_DEPTH);
     }
 
     // --------------------------------------
@@ -138,6 +138,7 @@ public class Debugger
         exception.printStackTrace(pw);
         return exception.getMessage() + "\nStacktrace: " + sw.toString();
     }
+    
     public static String classToString(Object object, Long id, Field[] fields, Object[] fieldValues)
     {
         StringBuilder result = new StringBuilder();
