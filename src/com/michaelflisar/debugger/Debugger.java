@@ -7,13 +7,23 @@ import java.lang.reflect.Field;
 
 public class Debugger
 {
-    public enum MODE
+    public enum Mode
     {
-        APP_TAG, // logs with application tag
-        CUSTOM_TAG // logs with custom tag
+        SIMPLE,
+        TIME,
+        CLASS,
+        TIME_AND_CLASS
     };
-
-    protected enum LEVEL
+    
+    public enum DebugTarget
+    {
+        DISABLED,
+        LOG,
+        FILE,
+        BOTH
+    }
+    
+    protected enum Level
     {
         V,
         D,
@@ -24,31 +34,43 @@ public class Debugger
     
     private static final int DEFAULT_CLASS_DEPTH = 4;
 
-    private static String mAppTag = "";
-    private static MODE mMode = MODE.CUSTOM_TAG;
-    private static boolean mDebuggingEnabled = true;
+    private static DebugTarget mDebugTarget = DebugTarget.LOG;
+    private static FileDebugger mFileDebugger = null;
+    private static String mAppTag = null;
+    private static Mode mMode = Mode.CLASS;
 
-    public static void setEnabled(boolean enabled)
+    public static void setDebugTarget(DebugTarget debugTarget)
     {
-        mDebuggingEnabled = enabled;
-    }
-
-    public static void setMode(MODE mode)
-    {
-        mMode = mode;
+        mDebugTarget = debugTarget;
     }
 
     public static void setAppTag(String appTag)
     {
         mAppTag = appTag;
     }
-
-    protected static boolean isEnabled()
+    
+    public static void setMode(Mode mode)
     {
-        return mDebuggingEnabled;
+        mMode = mode;
+    }
+    
+    public static void setFileDebugger(FileDebugger fileDebugger)
+    {
+        mFileDebugger = fileDebugger;
+    }
+    
+    public static void clearFileDebugger(int rowsToKeep, int maxRows)
+    {
+        if (mFileDebugger != null)
+            mFileDebugger.clear(rowsToKeep, maxRows);
     }
 
-    protected static MODE getMode()
+    protected static DebugTarget getDebugTarget()
+    {
+        return mDebugTarget;
+    }
+    
+    protected static Mode getMode()
     {
         return mMode;
     }
@@ -57,6 +79,11 @@ public class Debugger
     {
         return mAppTag;
     }
+    
+    protected static FileDebugger getFileDebugger()
+    {
+        return mFileDebugger;
+    }
 
     // --------------------------------------
     // Debugging call functions - DEBUG LEVEL
@@ -64,22 +91,22 @@ public class Debugger
 
     public static void d(String message)
     {
-        MainDebugger.debug(true, message, null, LEVEL.D, DEFAULT_CLASS_DEPTH);
+        MainDebugger.debug(true, message, null, Level.D, DEFAULT_CLASS_DEPTH);
     }
 
     public static void d(String message, String extraTag)
     {
-        MainDebugger.debug(true, message, extraTag, LEVEL.D, DEFAULT_CLASS_DEPTH);
+        MainDebugger.debug(true, message, extraTag, Level.D, DEFAULT_CLASS_DEPTH);
     }
 
     public static void d(boolean debug, String message)
     {
-        MainDebugger.debug(debug, message, null, LEVEL.D, DEFAULT_CLASS_DEPTH);
+        MainDebugger.debug(debug, message, null, Level.D, DEFAULT_CLASS_DEPTH);
     }
 
     public static void d(boolean debug, String message, String extraTag)
     {
-        MainDebugger.debug(debug, message, extraTag, LEVEL.D, DEFAULT_CLASS_DEPTH);
+        MainDebugger.debug(debug, message, extraTag, Level.D, DEFAULT_CLASS_DEPTH);
     }
 
     // --------------------------------------
@@ -88,43 +115,43 @@ public class Debugger
     
     public static void e(String message)
     {
-        MainDebugger.debug(true, message, null, LEVEL.E, DEFAULT_CLASS_DEPTH);
+        MainDebugger.debug(true, message, null, Level.E, DEFAULT_CLASS_DEPTH);
     }
 
     public static void e(String message, String extraTag)
     {
-        MainDebugger.debug(true, message, extraTag, LEVEL.E, DEFAULT_CLASS_DEPTH);
+        MainDebugger.debug(true, message, extraTag, Level.E, DEFAULT_CLASS_DEPTH);
     }
 
     public static void e(boolean debug, String message)
     {
-        MainDebugger.debug(debug, message, null, LEVEL.E, DEFAULT_CLASS_DEPTH);
+        MainDebugger.debug(debug, message, null, Level.E, DEFAULT_CLASS_DEPTH);
     }
 
     public static void e(boolean debug, String message, String extraTag)
     {
-        MainDebugger.debug(debug, message, extraTag, LEVEL.E, DEFAULT_CLASS_DEPTH);
+        MainDebugger.debug(debug, message, extraTag, Level.E, DEFAULT_CLASS_DEPTH);
     }
     
     public static void e(Exception exception)
     {
-        MainDebugger.debug(true, exceptionToString(exception), null, LEVEL.E, DEFAULT_CLASS_DEPTH);
+        MainDebugger.debug(true, exceptionToString(exception), null, Level.E, DEFAULT_CLASS_DEPTH);
     }
 
     public static void e(Exception exception, String extraTag)
     {
-        MainDebugger.debug(true, exceptionToString(exception), extraTag, LEVEL.E, DEFAULT_CLASS_DEPTH);
+        MainDebugger.debug(true, exceptionToString(exception), extraTag, Level.E, DEFAULT_CLASS_DEPTH);
     }
 
     public static void e(boolean debug, Exception exception)
     {
-        MainDebugger.debug(debug, exceptionToString(exception), null, LEVEL.E, DEFAULT_CLASS_DEPTH);
+        MainDebugger.debug(debug, exceptionToString(exception), null, Level.E, DEFAULT_CLASS_DEPTH);
     }
 
     public static void e(boolean debug, Exception exception, String extraTag)
     {
         
-        MainDebugger.debug(debug, exceptionToString(exception), extraTag, LEVEL.E, DEFAULT_CLASS_DEPTH);
+        MainDebugger.debug(debug, exceptionToString(exception), extraTag, Level.E, DEFAULT_CLASS_DEPTH);
     }
 
     // --------------------------------------
